@@ -56,9 +56,7 @@ def func_shuffle_sort(list_nodes, n_reduce_nodes=10):
 
 def func_reduce(key, value_list):
     """ generates a pair of (key = word, list (value = count)) """
-    result = list()
-    result.append(int(sum(value_list)))
-    return key, result
+    return key, [int(sum(value_list))]
 
 
 def plot_word_counts(list_words_counts, n=12, figure="word_counts.png"):
@@ -67,7 +65,7 @@ def plot_word_counts(list_words_counts, n=12, figure="word_counts.png"):
     keys_plot = [word for word, count in list_words_counts[:n]]
     indices = np.arange(n)
     plt.bar(indices, values_plot, align='center')
-    plt.xticks(np.arange(n), keys_plot)
+    plt.xticks(indices, keys_plot)
     plt.title("Occurrences of the " + str(n) + " most frequent words")
     plt.savefig(figure)
 
@@ -88,7 +86,7 @@ def word_count_mapReduce(input_file, n_reduce_nodes=10, write_results=True, n_wo
     lines = func_input(input_file)
 
     # map step : each line is processed by a distinct map node
-    # create a list of the list of (word, 1) pairs for every node
+    # creates a list of the list of (word, 1) pairs for every node
     map_nodes = [func_map(line_number, line) for line_number, line in lines]
 
     # shuffle and sort step
