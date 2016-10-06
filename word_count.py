@@ -32,10 +32,7 @@ def split_dict_(input_dict, number_chunks):
     i = 0
     for key, value in input_dict.items():
         dict_list[i][key] = value
-        if i < number_chunks-1:
-            i += 1
-        else:
-            i = 0
+        i = (i + 1) % number_chunks
     return dict_list
 
 
