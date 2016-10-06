@@ -52,11 +52,11 @@ def plot_word_counts(list_words_counts, n = 12, figure="word_counts.png"):
 def write_to_csv(list_words_counts, file="word_counts.csv"):
     """ writes the results to a csv file """
     with open(file, 'w') as csvfile:
-        fieldnames = ['first_name', 'last_name']
+        fieldnames = ['word', 'counts']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for word, count in list_words_counts:
-            writer.writerow({'first_name': word, 'last_name': count})
+            writer.writerow({'word': word, 'counts': count})
 
 
 def word_count_mapReduce(input_file, write_results=True, n_words_plot=12):
@@ -82,5 +82,5 @@ def word_count_mapReduce(input_file, write_results=True, n_words_plot=12):
 
 
 if __name__ == '__main__':
-    input_file = "test_documents/chapter2.txt"
+    input_file = "test_documents/chapter1.txt"
     word_count_mapReduce(input_file)
