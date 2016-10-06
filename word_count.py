@@ -26,7 +26,7 @@ def func_map(key, value):
     return list_pairs
 
 
-def split_dict_(input_dict, number_chunks):
+def split_dict(input_dict, number_chunks):
     """ splits dictionary by key into equal chunks """
     dict_list = [dict() for i in range(number_chunks)]
     i = 0
@@ -48,7 +48,7 @@ def func_shuffle_sort(list_nodes, n_reduce_nodes=10):
     for word, value in flat_list_pairs:
         word_dict[word].append(value)
     # divide the keys into n_reduce_nodes chunks, but the processing of each key is independent
-    return split_dict_(word_dict, n_reduce_nodes)
+    return split_dict(word_dict, n_reduce_nodes)
 
 
 def func_reduce(key, value_list):
