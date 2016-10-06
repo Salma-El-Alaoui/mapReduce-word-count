@@ -85,7 +85,7 @@ def write_to_csv(list_words_counts, file="word_counts.csv"):
 
 
 def word_count_mapReduce(input_file, n_reduce_nodes=10, write_results=True, n_words_plot=12):
-    """ simulates a mapReduce word count application for input_file"""
+    """ simulates a mapReduce word count application for input_file """
     # input reader step
     lines = func_input(input_file)
 
