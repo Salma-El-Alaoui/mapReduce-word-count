@@ -28,8 +28,6 @@ def func_map(key, value):
 
 def split_dict_(input_dict, number_chunks):
     """ splits dictionary by key into equal chunks """
-
-    # prep with empty dicts
     dict_list = [dict() for i in range(number_chunks)]
     i = 0
     for key, value in input_dict.items():
