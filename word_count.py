@@ -1,7 +1,6 @@
 import string
 import re
 from collections import defaultdict
-from itertools import zip_longest
 import matplotlib.pyplot as plt
 import numpy as np
 import operator
@@ -20,7 +19,7 @@ def func_map(key, value):
     """
         * generates a list of (key = word, value = 1) pairs
         * TODO: for larger amounts of data, it would have been better to write the map results into the standard output
-        instead of passing them directly ( in case it doesn't fit in memory)
+        instead of passing them directly (in case it doesn't fit in memory)
     """
     words = value.split()
     list_pairs = [(word, 1) for word in words]
@@ -104,6 +103,7 @@ def word_count_mapReduce(input_file, n_reduce_nodes=10, write_results=True, n_wo
 
     final_output = [(word, count[0]) for word, count in sorted(
                            final_output, key=operator.itemgetter(1), reverse=True)]
+
     # output writer step
     for word, count in final_output:
         print('{0:15} {1}'.format(word, count))
