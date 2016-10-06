@@ -65,6 +65,7 @@ def func_reduce(key, value_list):
 
 
 def plot_word_counts(list_words_counts, n=12, figure="word_counts.png"):
+    """ plots a bar chart of the n most frequent words """
     values_plot = [count for word, count in list_words_counts[:n]]
     keys_plot = [word for word, count in list_words_counts[:n]]
     indices = np.arange(n)
