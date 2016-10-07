@@ -52,8 +52,8 @@ def func_shuffle_sort(list_nodes, n_reduce_nodes=10):
 
 
 def func_reduce(key, value_list):
-    """ generates a pair of (key = word, list (value = count)) """
-    return key, [int(sum(value_list))]
+    """ generates a list of pairs of (key = word, value = count), in this case the list contains only one element """
+    return [(key, int(sum(value_list)))]
 
 
 def plot_word_counts(list_words_counts, n=12, figure="word_counts.png"):
@@ -90,12 +90,12 @@ def word_count_mapReduce(input_file, n_reduce_nodes=10, write_results=True, n_wo
     dict_reduce_nodes = func_shuffle_sort(map_nodes)
 
     # reduce step: each chunk of map results is handled by a reduce node, then we merge the results of each node
-    final_output = list()
+    reducers = list()
     for dict_counts in dict_reduce_nodes:
-        final_output += [func_reduce(word, counts_list) for word, counts_list in dict_counts.items()]
+        reducers += [func_reduce(word, counts_list)[0] for word, counts_list in dict_counts.items()]
 
-    final_output = [(word, count[0]) for word, count in sorted(
-                           final_output, key=operator.itemgetter(1), reverse=True)]
+    final_output = [(word, count) for word, count in sorted(
+                           reducers, key=operator.itemgetter(1), reverse=True)]
 
     # output writer step
     for word, count in final_output:
